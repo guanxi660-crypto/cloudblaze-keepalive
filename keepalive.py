@@ -78,8 +78,27 @@ def main():
         log('解析响应失败: %s %s' % (e, body[:200]))
         return 1
 
+    # ---- TCP 端口探测（主依据）----
+    # FAKE_MC_STARTUP=false 时 NanoLimbo 输出原版日志，面板状态恒为 starting，
+    # 用面板 current_state 探测会永远判定离线 -> 盲目 start。
+    # 改为直接 TCP 探测 MC 端口：通 = 在线。
+    import socket
+    MC_HOST, MC_PORT = 'free.cloudblaze.org', 36193
+    def _port_open():
+        try:
+            s = socket.create_connection((MC_HOST, MC_PORT), timeout=6)
+            s.close()
+            return True
+        except Exception:
+            return False
+    if _port_open():
+        log('在线 (TCP %s:%s 可连)，无需操作' % (MC_HOST, MC_PORT))
+        return 0
+    if state == 'starting':
+        log('端口 %s:%s 不通但面板 starting（可能仍在启动），跳过本次' % (MC_HOST, MC_PORT))
+        return 0
     if state == 'running':
-        log('在线 running，无需操作')
+        log('面板 running 但端口 %s:%s 不通（异常），跳过本次' % (MC_HOST, MC_PORT))
         return 0
     if suspended:
         log('实例被 suspend，start 无效，跳过（需人工处理）')
