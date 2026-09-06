@@ -8,6 +8,27 @@
 
 ---
 
+## ⚡ 推荐在 VPS 上跑
+
+本项目**推荐部署在 VPS（云服务器）上长期运行**，纯 Python 标准库实现，**资源占用极低**，7×24 挂机毫无压力：
+
+| 指标 | 实测占用 |
+|---|---|
+| 内存（RSS） | ≈ **25 MB**（运行瞬间峰值，跑完即释放） |
+| CPU | **近乎为 0**（每 5 分钟跑一次，单次执行 < 0.1 秒） |
+| 磁盘 | **< 1 MB**（不含日志） |
+| 依赖 | **0 个**（仅 Python 3.8+ 标准库） |
+
+> 运行方式：cron 每 5 分钟执行一次 `keepalive.py`，**跑完即退出，不留常驻进程**，对 VPS 完全无感。
+
+**User-Agent 示例**（绕过 ddos-guard 挑战时使用，必须 Firefox 系 UA，否则即使挑战通过也会被拦）：
+
+```
+Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0
+```
+
+---
+
 ## 功能特性
 
 | 功能 | 说明 |
@@ -133,7 +154,7 @@ python3 keepalive.py                # 手动跑一次保活（离线会自动拉
 在 `keepalive.py` 中填写：
 
 ```python
-TG_API_KEY=你的_Bot_Token
+TG_API_KEY=[REDACTED]
 TG_CHAT_ID = '你的_Telegram_用户ID'
 ```
 
