@@ -24,7 +24,7 @@
 **User-Agent 示例**（绕过 ddos-guard 挑战时使用，必须 Firefox 系 UA，否则即使挑战通过也会被拦）：
 
 ```
-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0
+示例：Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0
 ```
 
 ---
@@ -94,7 +94,7 @@ window.__BPC = {sid:'...', non:'...', dif:1, ts:...};
 - **User-Agent 必须用 Firefox 系**，否则即使挑战通过也会被拦：
 
   ```
-  Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0
+  示例：Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0
   ```
 
 - **指纹字段顺序固定**：`order = [cf, wv, wr, ff, af, pl, tz, sw, sh, cd, hc]`，join 后做 sha256，顺序不能乱；
@@ -108,7 +108,7 @@ window.__BPC = {sid:'...', non:'...', dif:1, ts:...};
 
 ### 1. 获取 API Key（只需要这个，不需要 SSH）
 
-直接打开 **https://panel.cloudblaze.org/api** 创建 API Key：
+直接打开 **https://panel.cloudblaze.org/account/api** 创建 API Key：
 
 1. **Allowed IPs 填运行脚本的服务器公网出口 IP**（Key 绑定 IP，填错用不了）；
 2. 创建后密钥**只显示一次**，立即复制；
