@@ -108,11 +108,11 @@ window.__BPC = {sid:'...', non:'...', dif:1, ts:...};
 
 ### 1. 获取 API Key（只需要这个，不需要 SSH）
 
-1. 登录 `panel.cloudblaze.org`；
-2. 右上角 **账号（Account）→ API Credentials → Create**；
-3. **Allowed IPs 填运行脚本的服务器公网出口 IP**（Key 绑定 IP，填错用不了）；
-4. 创建后密钥**只显示一次**，立即复制；
-5. 写入文件（注意文件名以 `.` 开头）：
+直接打开 **https://panel.cloudblaze.org/api** 创建 API Key：
+
+1. **Allowed IPs 填运行脚本的服务器公网出口 IP**（Key 绑定 IP，填错用不了）；
+2. 创建后密钥**只显示一次**，立即复制；
+3. 写入文件（注意文件名以 `.` 开头）：
 
    ```bash
    echo '你的_API_KEY' > /root/cloudblaze/.apitoken
