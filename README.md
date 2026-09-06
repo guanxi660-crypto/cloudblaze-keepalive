@@ -33,7 +33,7 @@ server_id.example   # 服务器 UUID 配置模板（复制为 server_id）
 
 ## 🛡️ ddos-guard 是怎么绕过的
 
-CloudBlaze 面板对所有请求先过 ddos-guard 防护：没有通过挑战的请求会收到 **403 挑战页**，页面里内嵌一段 JS：
+CloudBlaze 面板对所有请求先过 [DDoS-Guard](https://ddos-guard.net/) 防护：没有通过挑战的请求会收到 **403 挑战页**，页面里内嵌一段 JS：
 
 ```js
 window.__BPC = {sid:'...', non:'...', dif:1, ts:...};
@@ -89,7 +89,7 @@ window.__BPC = {sid:'...', non:'...', dif:1, ts:...};
 
 1. 登录 `panel.cloudblaze.org`；
 2. 右上角 **账号（Account）→ API Credentials → Create**；
-3. **Allowed IPs 填你服务器的公网 IP**（本项目实测：`192.255.178.50`；Key 绑定 IP，其它 IP 用不了）；
+3. **Allowed IPs 填运行脚本的服务器公网出口 IP**（Key 绑定 IP，填错用不了）；
 4. 创建后密钥**只显示一次**，立即复制；
 5. 写入文件（注意文件名以 `.` 开头）：
 
@@ -133,7 +133,7 @@ python3 keepalive.py                # 手动跑一次保活（离线会自动拉
 在 `keepalive.py` 中填写：
 
 ```python
-TG_API_KEY = '123456:ABC-Your-Bot-Token'
+TG_API_KEY=你的_Bot_Token
 TG_CHAT_ID = '你的_Telegram_用户ID'
 ```
 
@@ -167,10 +167,8 @@ TG_CHAT_ID = '你的_Telegram_用户ID'
 
 本项目参考并感谢以下项目/作者：
 
-- **OuiPanel 保活脚本**（`keepalive.py` 同款探测-拉起设计思路）
-- **Pterodactyl Panel** — 完善的 Client API 文档与白标面板生态
-- **NanoLimbo** — 轻量 Limbo 服务器实现（保活对象的典型场景）
-- **ddos-guard 挑战逆向相关的社区研究** — 指纹字段与 PoW 算法分析的宝贵资料
+- [DDoS-Guard](https://ddos-guard.net/) — 防护服务商官方站点
+- [NanoLimbo](https://github.com/Nan1t/NanoLimbo) — 轻量 Limbo 服务器实现（保活对象的典型场景）
 
 ## ⚠️ 免责声明
 
